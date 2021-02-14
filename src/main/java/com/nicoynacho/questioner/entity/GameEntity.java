@@ -2,10 +2,14 @@ package com.nicoynacho.questioner.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import com.nicoynacho.questioner.enums.GameCategoryEnum;
 
 @Entity
 @Table(name = "QUESTIONER_GAME")
@@ -24,12 +28,16 @@ public class GameEntity {
 	
 	@Column(name = "question_answer")
 	private String questionAnswer;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name = "game_category")
+	private GameCategoryEnum category;
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -55,5 +63,13 @@ public class GameEntity {
 
 	public void setQuestionAnswer(String questionAnswer) {
 		this.questionAnswer = questionAnswer;
+	}
+
+	public GameCategoryEnum getCategory() {
+		return category;
+	}
+
+	public void setCategory(GameCategoryEnum category) {
+		this.category = category;
 	}
 }

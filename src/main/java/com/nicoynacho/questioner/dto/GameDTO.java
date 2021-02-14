@@ -1,5 +1,7 @@
 package com.nicoynacho.questioner.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class GameDTO {
@@ -10,8 +12,12 @@ public class GameDTO {
 	@JsonProperty("max_attempts")
 	private int maxAttempts;
 	
+	@JsonInclude(Include.NON_NULL)
 	@JsonProperty("game_answer")
 	private String gameAnswer;
+	
+	@JsonProperty("game_category")
+	private String gameCategory;
 
 	public String getGameName() {
 		return gameName;
@@ -35,5 +41,13 @@ public class GameDTO {
 
 	public void setGameAnswer(String gameAnswer) {
 		this.gameAnswer = gameAnswer;
+	}
+
+	public String getGameCategory() {
+		return gameCategory;
+	}
+
+	public void setGameCategory(String gameCategory) {
+		this.gameCategory = gameCategory;
 	}
 }
