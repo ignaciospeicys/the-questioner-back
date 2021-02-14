@@ -7,6 +7,6 @@ import com.nicoynacho.questioner.dto.rest.ServiceResponse;
 
 public interface IRestResponseService {
 	
-	ResponseEntity<ServiceResponse> buildResponse(QuestionaireHttpInformation httpInfo);
+	ResponseEntity<ServiceResponse> buildResponse(QuestionaireHttpInformation httpInfo, Object body);
 
 }

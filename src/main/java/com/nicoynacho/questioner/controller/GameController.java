@@ -28,13 +28,13 @@ public class GameController {
 	
 	@PostMapping
 	public ResponseEntity<ServiceResponse> doCreate(@RequestBody GameDTO game, HttpServletRequest req) {
-		manager.create(game);
+		Long resourceId = manager.create(game);
 		return responseService.buildResponse(
 				new QuestionaireInfoBuilder()
 					.setCode(200)
 					.setHttpMethod(HttpMethod.POST)
 					.setOperation(req.getRequestURI())
-				.build());
+				.build(), resourceId);
 	}
 
 }

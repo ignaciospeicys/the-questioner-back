@@ -9,11 +9,24 @@ public class QuestionerPapaException extends Exception {
 	protected String businessErrorCode;
 	
 	protected String message;
+	
+	enum ErrorType {
+		CONNECT_500,
+		FETCH_404
+		
+	}
 
 	public QuestionerPapaException(Integer code, String message) {
 		super(message);
 		this.code = code;
 		this.businessErrorCode = String.valueOf(code);
+		this.message = message;
+	}
+	
+	public QuestionerPapaException(Integer code, String message, ErrorType errorType) {
+		super(message);
+		this.code = code;
+		this.businessErrorCode = errorType.name();
 		this.message = message;
 	}
 

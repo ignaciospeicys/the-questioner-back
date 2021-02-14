@@ -18,6 +18,8 @@ public class QuestionaireHttpInformation {
 	
 	private HttpMethod httpMethod;
 	
+	private boolean isError;
+	
 	private QuestionaireHttpInformation() {
 	}
 	
@@ -49,6 +51,7 @@ public class QuestionaireHttpInformation {
 		}
 		
 		public QuestionaireErrorBuilder enableErrorMode() {
+			questionaireHttpInformation.isError = true;
 			return new QuestionaireErrorBuilder();
 		}
 	}
@@ -101,6 +104,10 @@ public class QuestionaireHttpInformation {
 
 	public HttpMethod getHttpMethod() {
 		return httpMethod;
+	}
+	
+	public Boolean getIsError() {
+		return isError;
 	}
 
 }

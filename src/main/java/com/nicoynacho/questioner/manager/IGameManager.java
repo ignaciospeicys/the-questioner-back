@@ -4,6 +4,6 @@ import com.nicoynacho.questioner.dto.GameDTO;
 
 public interface IGameManager {
 	
-	void create(GameDTO input);
+	Long create(GameDTO input);
 
 }
