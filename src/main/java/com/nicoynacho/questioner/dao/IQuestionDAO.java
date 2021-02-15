@@ -6,6 +6,8 @@ import org.springframework.stereotype.Repository;
 import com.nicoynacho.questioner.entity.QuestionEntity;
 
 @Repository
-public interface IQuestionDAO extends PagingAndSortingRepository<QuestionEntity, Long>{
+public interface IQuestionDAO extends PagingAndSortingRepository<QuestionEntity, Long> {
+	
+	int countByUsernameAndGameId(String username, Long gameId);
 
 }

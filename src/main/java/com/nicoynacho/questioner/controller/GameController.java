@@ -1,5 +1,7 @@
 package com.nicoynacho.questioner.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +45,17 @@ public class GameController {
 	@GetMapping("/{id}")
 	public ResponseEntity<ServiceResponse> doFetch(@RequestParam Long id, HttpServletRequest req) throws ElementNotFoundException {
 		GameDTO response = manager.findAndConvert(id);
+		return responseService.buildResponse(
+				new QuestionaireInfoBuilder()
+					.setCode(200)
+					.setHttpMethod(HttpMethod.GET)
+					.setOperation(req.getRequestURI())
+				.build(), response);
+	}
+	
+	@GetMapping
+	public ResponseEntity<ServiceResponse> doFetchAll(HttpServletRequest req) throws ElementNotFoundException {
+		List<GameDTO> response = manager.findAll();
 		return responseService.buildResponse(
 				new QuestionaireInfoBuilder()
 					.setCode(200)

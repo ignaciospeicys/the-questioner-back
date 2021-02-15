@@ -1,6 +1,8 @@
 package com.nicoynacho.questioner.manager.impl;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,6 +42,11 @@ public class GameManagerImpl implements IGameManager {
 	public GameDTO findAndConvert(Long gameId) throws ElementNotFoundException {
 		GameEntity game = get(gameId);
 		return mapper.convert(game);
+	}
+	
+	@Override
+	public List<GameDTO> findAll() {
+		return gameDAO.findAll().stream().map(mapper::convert).collect(Collectors.toList());
 	}
 
 

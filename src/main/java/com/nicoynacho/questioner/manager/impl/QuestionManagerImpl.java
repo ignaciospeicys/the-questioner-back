@@ -24,17 +24,28 @@ public class QuestionManagerImpl implements IQuestionManager {
 	
 	@Override
 	public GameAnswerDTO submitAnswer(QuestionDTO input) throws ElementNotFoundException {
-		GameEntity game = gameManager.get(input.getGameId());
+		String username = input.getUsername();
 		String inputAnswer = input.getAnswer();
-		QuestionEntity entity = new QuestionEntity(input.getUsername(), inputAnswer, game);
+		GameAnswerDTO gameAnswer = new GameAnswerDTO();
+		GameEntity game = gameManager.get(input.getGameId());
+		QuestionEntity entity = new QuestionEntity(username, inputAnswer, game);
 		questionDAO.save(entity);
 		String originalAnswer = game.getQuestionAnswer();
-		return checkAnswer(originalAnswer, inputAnswer);
+		checkOutOfGame(gameAnswer, username, game);
+		checkAnswer(gameAnswer, originalAnswer, inputAnswer);	
+		return gameAnswer;
 	}
 	
-	private GameAnswerDTO checkAnswer(String originalAnswer, String inputAnswer) {
+	private void checkOutOfGame(GameAnswerDTO answer, String username, GameEntity game) {
+		int count = questionDAO.countByUsernameAndGameId(username, game.getId());
+		if (count > game.getMaxAttempts())
+			answer.setOutOfGame(true);
+	}
+	
+	private void checkAnswer(GameAnswerDTO answer, String originalAnswer, String inputAnswer) {
 		boolean match = QuestionerAnswerMatcher.doAnswersMatch(originalAnswer, inputAnswer);
-		return match ? new GameAnswerDTO(match, originalAnswer) : new GameAnswerDTO(match, inputAnswer);
+		answer.setAccepted(match);
+		answer.setAnswer(match ? originalAnswer : inputAnswer);
 	}
 
 }

@@ -9,6 +9,12 @@ public class GameAnswerDTO {
 	
 	@JsonProperty("answer_accepted")
 	private boolean accepted;
+	
+	@JsonProperty("out_of_game")
+	private boolean outOfGame;
+	
+	public GameAnswerDTO() {
+	}
 
 	public GameAnswerDTO(boolean match, String questionAnswer) {
 		this.answer = questionAnswer;
@@ -29,5 +35,13 @@ public class GameAnswerDTO {
 
 	public void setAccepted(boolean accepted) {
 		this.accepted = accepted;
+	}
+
+	public boolean isOutOfGame() {
+		return outOfGame;
+	}
+
+	public void setOutOfGame(boolean outOfGame) {
+		this.outOfGame = outOfGame;
 	}
 }

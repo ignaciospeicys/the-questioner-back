@@ -1,9 +1,13 @@
 package com.nicoynacho.questioner.service.impl;
 
+import java.util.stream.Collectors;
+
 import org.springframework.stereotype.Service;
 
 import com.nicoynacho.questioner.dto.GameDTO;
+import com.nicoynacho.questioner.dto.QuestionDTO;
 import com.nicoynacho.questioner.entity.GameEntity;
+import com.nicoynacho.questioner.entity.QuestionEntity;
 import com.nicoynacho.questioner.enums.GameCategoryEnum;
 import com.nicoynacho.questioner.service.IEntityMapper;
 
@@ -26,7 +30,17 @@ public class EntityMapperImpl implements IEntityMapper {
 		game.setGameName(entity.getGameName());
 		game.setGameCategory(entity.getCategory().name());
 		game.setMaxAttempts(entity.getMaxAttempts());
+		game.setQuestions(entity.getQuestionsReceived().stream().map(this::convert).collect(Collectors.toList()));
 		return game;
+	}
+	
+	@Override
+	public QuestionDTO convert(QuestionEntity entity) {
+		QuestionDTO question = new QuestionDTO();
+		question.setAnswer(entity.getDetail());
+		question.setUsername(entity.getUsername());
+		question.setGameId(entity.getGameId());
+		return question;
 	}
 
 }
