@@ -1,12 +1,16 @@
 package com.nicoynacho.questioner.entity;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.nicoynacho.questioner.enums.GameCategoryEnum;
@@ -32,6 +36,9 @@ public class GameEntity {
 	@Enumerated(EnumType.STRING)
 	@Column(name = "game_category")
 	private GameCategoryEnum category;
+	
+	@OneToMany(mappedBy = "game", fetch = FetchType.LAZY)
+	private Set<QuestionEntity> questionsReceived;
 
 	public Long getId() {
 		return id;
@@ -71,5 +78,13 @@ public class GameEntity {
 
 	public void setCategory(GameCategoryEnum category) {
 		this.category = category;
+	}
+
+	public Set<QuestionEntity> getQuestionsReceived() {
+		return questionsReceived;
+	}
+
+	public void setQuestionsReceived(Set<QuestionEntity> questionsReceived) {
+		this.questionsReceived = questionsReceived;
 	}
 }

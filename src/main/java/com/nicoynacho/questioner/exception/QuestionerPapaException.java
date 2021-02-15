@@ -13,7 +13,6 @@ public class QuestionerPapaException extends Exception {
 	enum ErrorType {
 		CONNECT_500,
 		FETCH_404
-		
 	}
 
 	public QuestionerPapaException(Integer code, String message) {

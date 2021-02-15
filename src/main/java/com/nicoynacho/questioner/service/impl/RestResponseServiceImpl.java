@@ -14,13 +14,11 @@ public class RestResponseServiceImpl implements IRestResponseService {
 	@Override
 	public ResponseEntity<ServiceResponse> buildResponse(QuestionaireHttpInformation httpInfo, Object body) {
 		ServiceResponse response = new ServiceResponse();
-		
 		if (httpInfo.getIsError()) {
 			AppError err = new AppError(httpInfo.getBusinessErrorCode(), httpInfo.getDetail());
 			response.setError(err);
-		} else {
-			response.setData(body);
 		}
+		response.setData(body);
 		return ResponseEntity.status(httpInfo.getCode()).body(response);
 	}
 
