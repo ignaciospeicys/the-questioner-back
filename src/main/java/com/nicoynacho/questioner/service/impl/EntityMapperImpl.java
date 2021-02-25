@@ -20,6 +20,7 @@ public class EntityMapperImpl implements IEntityMapper {
 		game.setGameName(input.getGameName());
 		game.setMaxAttempts(input.getMaxAttempts());
 		game.setQuestionAnswer(input.getGameAnswer());
+		game.setQuestionDetail(input.getGameQuestion());
 		game.setCategory(GameCategoryEnum.findByName(input.getGameCategory()));
 		return game;
 	}
@@ -30,6 +31,7 @@ public class EntityMapperImpl implements IEntityMapper {
 		game.setGameName(entity.getGameName());
 		game.setGameCategory(entity.getCategory().name());
 		game.setMaxAttempts(entity.getMaxAttempts());
+		game.setGameQuestion(entity.getQuestionDetail());
 		game.setQuestions(entity.getQuestionsReceived().stream().map(this::convert).collect(Collectors.toList()));
 		return game;
 	}

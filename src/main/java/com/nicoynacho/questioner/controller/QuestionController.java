@@ -16,18 +16,14 @@ import com.nicoynacho.questioner.dto.rest.QuestionaireHttpInformation.Questionai
 import com.nicoynacho.questioner.dto.rest.ServiceResponse;
 import com.nicoynacho.questioner.exception.subtype.ElementNotFoundException;
 import com.nicoynacho.questioner.manager.IQuestionManager;
-import com.nicoynacho.questioner.service.IRestResponseService;
 
 @RestController
 @RequestMapping("v1/question")
-public class QuestionController {
+public class QuestionController extends AbstractController {
 	
 	@Autowired
 	private IQuestionManager manager;
 	
-	@Autowired
-	private IRestResponseService responseService;
-
 	@PostMapping
 	public ResponseEntity<ServiceResponse> postAnswer(@RequestBody QuestionDTO question, HttpServletRequest req) throws ElementNotFoundException {
 		GameAnswerDTO response = manager.submitAnswer(question);

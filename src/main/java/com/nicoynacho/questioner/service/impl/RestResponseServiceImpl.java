@@ -19,6 +19,7 @@ public class RestResponseServiceImpl implements IRestResponseService {
 			response.setError(err);
 		}
 		response.setData(body);
+		response.setOperation(String.format("%s : %s", httpInfo.getHttpMethod().name(), httpInfo.getOperation()));
 		return ResponseEntity.status(httpInfo.getCode()).body(response);
 	}
 

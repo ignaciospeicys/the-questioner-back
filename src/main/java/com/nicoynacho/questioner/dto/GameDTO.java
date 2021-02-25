@@ -2,27 +2,35 @@ package com.nicoynacho.questioner.dto;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class GameDTO {
-	
+
 	@JsonProperty("game_name")
 	private String gameName;
-	
+
 	@JsonProperty("max_attempts")
 	private int maxAttempts;
-	
-	@JsonInclude(Include.NON_NULL)
+
 	@JsonProperty("game_answer")
 	private String gameAnswer;
-	
+
+	@JsonProperty("game_question")
+	private String gameQuestion;
+
 	@JsonProperty("game_category")
 	private String gameCategory;
 
 	@JsonProperty("questions")
 	private List<QuestionDTO> questions;
+
+	public String getGameQuestion() {
+		return gameQuestion;
+	}
+
+	public void setGameQuestion(String gameQuestion) {
+		this.gameQuestion = gameQuestion;
+	}
 
 	public String getGameName() {
 		return gameName;

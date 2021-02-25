@@ -3,6 +3,9 @@ package com.nicoynacho.questioner.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -11,26 +14,39 @@ import javax.persistence.Table;
 @Table(name = "QUESTION_ENTRY")
 public class QuestionEntity {
 	
+	@Id
+	@Column(name = "id")
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
+
 	@JoinColumn(name = "player_username")
 	private String username;
-	
+
 	@Column(name = "question_detail")
 	private String detail;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "game_id", updatable = false)
+	@JoinColumn(name = "game_id")
 	private GameEntity game;
-	
+
 	@Column(name = "game_id", insertable = false, updatable = false)
 	private Long gameId;
 
 	public QuestionEntity() {
 	}
-	
+
 	public QuestionEntity(String username, String detail, GameEntity game) {
 		this.username = username;
 		this.detail = detail;
 		this.game = game;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getUsername() {
@@ -101,5 +117,5 @@ public class QuestionEntity {
 			return false;
 		return true;
 	}
-	
+
 }

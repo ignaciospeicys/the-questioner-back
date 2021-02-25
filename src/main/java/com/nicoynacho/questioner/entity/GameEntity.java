@@ -18,27 +18,38 @@ import com.nicoynacho.questioner.enums.GameCategoryEnum;
 @Entity
 @Table(name = "QUESTIONER_GAME")
 public class GameEntity {
-	
+
 	@Id
 	@Column(name = "game_id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
+
 	@Column(name = "game_name")
 	private String gameName;
-	
+
 	@Column(name = "max_attempts")
 	private int maxAttempts;
-	
+
+	@Column(name = "question_detail")
+	private String questionDetail;
+
 	@Column(name = "question_answer")
 	private String questionAnswer;
-	
+
 	@Enumerated(EnumType.STRING)
 	@Column(name = "game_category")
 	private GameCategoryEnum category;
-	
+
 	@OneToMany(mappedBy = "game", fetch = FetchType.LAZY)
 	private Set<QuestionEntity> questionsReceived;
+
+	public String getQuestionDetail() {
+		return questionDetail;
+	}
+
+	public void setQuestionDetail(String questionDetail) {
+		this.questionDetail = questionDetail;
+	}
 
 	public Long getId() {
 		return id;
